@@ -1,25 +1,35 @@
-name: Daily Commit Automation by 23f2001216@ds.study.iitm.ac.in
+name: Daily Automated Commit
 
 on:
   schedule:
-    - cron: '30 2 * * *'  # Runs daily at 02:30 UTC
+    # Run at 02:30 UTC every day
+    - cron: '30 2 * * *'
+  workflow_dispatch:  # Allows manual triggering for testing
 
 jobs:
-  commit-job:
+  create-daily-commit:
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Checkout repository by 23f2001216@ds.study.iitm.ac.in
+      - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Git setup by 23f2001216@ds.study.iitm.ac.in
+        with:
+          fetch-depth: 1
+      
+      - name: Configure Git
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "23f2001216@ds.study.iitm.ac.in"
-
-      - name: Create a commit by 23f2001216@ds.study.iitm.ac.in
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+      
+      - name: Create Daily Update (23f2001216@ds.study.iitm.ac.in)
         run: |
-          echo "Last run: $(date)" > last_run.txt
-          git add last_run.txt
-          git commit -m "Automated commit on $(date)"
+          # Create or update the daily status file
+          echo "Daily update: $(date)" >> daily-status.txt
+          
+          # Stage and commit the changes
+          git add daily-status.txt
+          git commit -m "Daily automated update $(date)"
+          
+      - name: Push changes
+        run: |
           git push
