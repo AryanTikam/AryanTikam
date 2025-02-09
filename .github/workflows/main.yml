@@ -1,4 +1,4 @@
-name: Daily Commit Automation
+name: Daily Commit Automation by 23f2001216@ds.study.iitm.ac.in
 
 on:
   schedule:
@@ -9,15 +9,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repository by 23f2001216@ds.study.iitm.ac.in
         uses: actions/checkout@v4
 
-      - name: Set up Git
+      - name: Git setup by 23f2001216@ds.study.iitm.ac.in
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "23f2001216@ds.study.iitm.ac.in"
 
-      - name: Create a commit
+      - name: Create a commit by 23f2001216@ds.study.iitm.ac.in
         run: |
           echo "Last run: $(date)" > last_run.txt
           git add last_run.txt
