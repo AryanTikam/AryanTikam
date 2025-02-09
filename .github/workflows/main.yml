@@ -1,24 +1,33 @@
-name: Daily Commit Automation
+name: Daily Commit Workflow
 
 on:
   schedule:
-    - cron: "30 2 * * *"  # Runs daily at 2:30 AM UTC (adjust as needed)
-  workflow_dispatch:  # Allows manual triggering
+    - cron: '10 17 * * *'  # Runs daily at 5:10 PM UTC
+  workflow_dispatch:
 
 jobs:
-  daily-commit:
-    name: Commit Job
+  commit:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Update last_update.txt by 23f2001216@ds.study.iitm.ac.in
+      - name: Add commit using 23f2001216@ds.study.iitm.ac.in
+        env:
+          PAT: ${{ secrets.PAT }}  # PAT stored as a secret
         run: |
-          echo "Last update: $(date)" > last_update.txt
-          git config --global user.name "github-actions[bot]"
+          git config --global user.name "Aryan"
           git config --global user.email "23f2001216@ds.study.iitm.ac.in"
-          git add last_update.txt
-          git commit -m "Automated update: $(date)"
-          git push origin main # or your main branch name
+
+          echo "Daily commit on $(date)" >> daily-log.txt
+
+          git add daily-log.txt
+          git commit -m "Automated daily commit on $(date)"
+
+          # Debugging steps BEFORE the push
+          ls -la
+          git status
+
+          git push origin main  # or your main branch name, using the PAT for auth
+          git push "https://${{ secrets.PAT }}@github.com/${{ github.repository }}.git" main
