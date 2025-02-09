@@ -1,13 +1,23 @@
-name: My GitHub Action
+name: Daily Commit Automation
 
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: "30 2 * * *"  # Runs daily at 2:30 AM UTC (adjust as needed)
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
-  test:
+  daily-commit:
     runs-on: ubuntu-latest
+
     steps:
-      - name: 23f2001216@ds.study.iitm.ac.in
-        run: echo "Hello, world!"
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Make Changes
+        run: |
+          echo "Last update: $(date)" > last_update.txt
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "23f2001216@ds.study.iitm.ac.in"
+          git add last_update.txt
+          git commit -m "Automated update: $(date)"
+          git push
