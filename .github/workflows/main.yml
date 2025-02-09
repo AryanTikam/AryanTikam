@@ -4,32 +4,19 @@ on:
   schedule:
     # Run at 02:30 UTC every day
     - cron: '30 2 * * *'
-  workflow_dispatch:  # Allows manual triggering for testing
+  workflow_dispatch:
 
 jobs:
   create-daily-commit:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
+      - uses: actions/checkout@v4
       
-      - name: "23f2001216@ds.study.iitm.ac.in"
+      - name: 23f2001216@ds.study.iitm.ac.in  # Email as step name
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions@github.com"
-      
-      - name: Create daily update
-        run: |
-          # Create or update the daily status file
           echo "Daily update: $(date)" >> daily-status.txt
-          
-          # Stage and commit the changes
           git add daily-status.txt
           git commit -m "Daily automated update $(date)"
-          
-      - name: Push changes
-        run: |
           git push
