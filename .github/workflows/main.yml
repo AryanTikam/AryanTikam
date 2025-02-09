@@ -1,4 +1,4 @@
-name: Daily Commit Automation by 23f2001216@ds.study.iitm.ac.in
+name: "Daily Commit Automation by 23f2001216@ds.study.iitm.ac.in"
 
 on:
   schedule:
@@ -7,10 +7,11 @@ on:
 
 jobs:
   daily-commit:
+    name: "Commit Job by 23f2001216@ds.study.iitm.ac.in"
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository by 23f2001216@ds.study.iitm.ac.in
+      - name: "Checkout Repository by 23f2001216@ds.study.iitm.ac.in"
         uses: actions/checkout@v4
 
       - name: "Step executed by 23f2001216@ds.study.iitm.ac.in"
