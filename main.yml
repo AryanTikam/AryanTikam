@@ -16,12 +16,12 @@ jobs:
         with:
           fetch-depth: 1
       
-      - name: Setup for 23f2001216@ds.study.iitm.ac.in
+      - name: "23f2001216@ds.study.iitm.ac.in"
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions@github.com"
       
-      - name: Update Repository for 23f2001216@ds.study.iitm.ac.in
+      - name: Create daily update
         run: |
           # Create or update the daily status file
           echo "Daily update: $(date)" >> daily-status.txt
